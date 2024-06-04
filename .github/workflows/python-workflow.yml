@@ -11,10 +11,20 @@ jobs:
     #----------------------------------------------#
     # Add your matrix strategy configuration here  #
     #----------------------------------------------#
-    runs-on: ubuntu-latest
+    Strategy:
+    Matrix:
+      version: ["3.10", "3.9", "3.8", "3.7"]
+      Platform: [ubuntu-latest, macos-latest, windoes-latest]
+      include:
+        - platform: ubuntu-latest
+          version: "3.6"
+        exclude:
+        - platform: windows-latest
+          version: "3.10"
+    runs-on: ${{ matrix.platform }} 
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Python 3.10
+    - name: Set up Python ${{matrix.platform}}
       uses: actions/setup-python@v2
       with:
         python-version: "3.10"
