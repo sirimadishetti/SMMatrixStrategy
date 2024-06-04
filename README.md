@@ -1,0 +1,2 @@
+# SMMatrixStrategy
+Challenge exercise3
